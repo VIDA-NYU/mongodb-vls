@@ -22,7 +22,7 @@ The team includes:
 
 ## How To Install
 
-Please note that MongoDB-VLS has been only tested on CentOS.
+Please note that MongoDB-VLS has been only tested on CentOS and Fedora 23 Server.
 
 ### MongoDB-VLS
 
