@@ -1,0 +1,18 @@
+DBNAME=$1
+NRECORDS=$2
+let "five=(95*NRECORDS)/100"
+let "ten=(90*NRECORDS)/100"
+let "tfive=(75*NRECORDS)/100"
+for var in 0 1 2 3 4 5 6 7 8 9
+do
+  for scan in 1 8 16 64
+  do
+    for index in for index in $tfive $ten $five
+    do
+      experiments/start_mongod_server_index
+      experiments/scripts/ycsb-scripts/ycsb_index_query_updates $DBNAME $NRECORDS $scan $index > experiments/results/stat_index_scan_updates_$index\_$scan\_$var.out
+      experiments/stop_mongod_server
+      sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"
+    done
+  done
+done

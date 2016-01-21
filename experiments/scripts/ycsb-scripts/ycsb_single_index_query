@@ -1,0 +1,2 @@
+cd ycsb
+./bin/ycsb run mongodb -p mongodb.url=localhost:30030 -p mongodb.database=$1 -p recordcount=$2 -P workloads/workloadn -p operationcount=1 -p indexkey=$3 -threads 1 -target 1000 -s

@@ -1,0 +1,2 @@
+numactl --interleave=all mongod --dbpath=/mongodb/data/ --nojournal --port=30030 --index=False --fork --logpath=/mongodb/log --logappend
+sleep 250

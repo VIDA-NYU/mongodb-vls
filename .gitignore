@@ -1,0 +1,5 @@
+*~
+ycsb/core/target/
+ycsb/distribution/target/
+ycsb/mongodb/target
+*.DS_Store

@@ -1,0 +1,2 @@
+cd ycsb
+./bin/ycsb load mongodb -p mongodb.url=localhost:30030 -p mongodb.database=$1 -p recordcount=$2 -s

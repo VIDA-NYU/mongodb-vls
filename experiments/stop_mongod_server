@@ -1,0 +1,2 @@
+mongod --shutdown --dbpath=/mongodb/data --port=30030
+sleep 10

@@ -1,0 +1,12 @@
+DBNAME=$1
+NRECORDS=$2
+for var in 0 1 2 3 4 5 6 7 8 9
+do
+  for scan in 1 8 16 64
+  do
+    experiments/start_mongod_server
+    experiments/scripts/ycsb-scripts/ycsb_query_updates $DBNAME $NRECORDS $scan > experiments/results/stat_scan_updates_10000_$scan\_$var.out
+    experiments/stop_mongod_server
+    sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"
+  done
+done

@@ -1,0 +1,173 @@
+# -*- mode: python -*-
+
+Import("env")
+
+env.Library(
+    target='query_planner',
+    source=[
+        "canonical_query.cpp",
+        "index_tag.cpp",
+        "parsed_projection.cpp",
+        "plan_cache.cpp",
+        "plan_enumerator.cpp",
+        "planner_access.cpp",
+        "planner_analysis.cpp",
+        "planner_ixselect.cpp",
+        "query_planner.cpp",
+        "query_solution.cpp",
+    ],
+    LIBDEPS=[
+        "index_bounds",
+        "lite_parsed_query",
+        "$BUILD_DIR/mongo/bson",
+        "$BUILD_DIR/mongo/expressions",
+    ],
+)
+
+env.Library(
+    target='query',
+    source=[
+        "cached_plan_runner.cpp",
+        "eof_runner.cpp",
+        "explain_plan.cpp",
+        "get_runner.cpp",
+        "idhack_runner.cpp",
+        "internal_runner.cpp",
+        "multi_plan_runner.cpp",
+        "new_find.cpp",
+        "plan_executor.cpp",
+        "plan_ranker.cpp",
+        "single_solution_runner.cpp",
+        "stage_builder.cpp",
+        "type_explain.cpp",
+    ],
+    LIBDEPS=[
+        "query_planner",
+        "$BUILD_DIR/mongo/db/exec/exec"
+    ],
+)
+
+env.Library(
+    target="index_bounds",
+    source=[
+        "index_bounds.cpp",
+        "index_bounds_builder.cpp",
+        "interval.cpp",
+    ],
+    LIBDEPS=[
+        "query_logger",
+        "$BUILD_DIR/mongo/bson",
+        "$BUILD_DIR/mongo/expressions_geo",
+        "$BUILD_DIR/mongo/mongohasher",
+    ],
+)
+
+env.Library(
+    target="lite_parsed_query",
+    source=[
+        "lite_parsed_query.cpp"
+    ],
+    LIBDEPS=[
+        "$BUILD_DIR/mongo/bson",
+    ],
+)
+
+env.Library(
+    target="query_planner_test_lib",
+    source=[
+        "query_planner_test_lib.cpp",
+    ],
+    LIBDEPS=[
+        "query_planner",
+    ],
+)
+
+env.Library(
+    target="query_logger",
+    source=[
+        "qlog.cpp"
+    ],
+    LIBDEPS=[
+        "$BUILD_DIR/mongo/server_parameters",
+    ],
+)
+
+env.CppUnitTest(
+    target="index_bounds_test",
+    source=[
+        "index_bounds_test.cpp"
+    ],
+    LIBDEPS=[
+        "index_bounds",
+    ],
+)
+
+env.CppUnitTest(
+    target="index_bounds_builder_test",
+    source=[
+        "index_bounds_builder_test.cpp"
+    ],
+    LIBDEPS=[
+        "index_bounds",
+    ],
+)
+
+env.CppUnitTest(
+    target="interval_test",
+    source=[
+        "interval_test.cpp"
+    ],
+    LIBDEPS=[
+        "index_bounds",
+    ],
+)
+
+env.CppUnitTest(
+    target="lite_parsed_query_test",
+    source=[
+        "lite_parsed_query_test.cpp"
+    ],
+    LIBDEPS=[
+        "lite_parsed_query",
+    ],
+)
+
+env.CppUnitTest(
+    target="parsed_projection_test",
+    source=[
+        "parsed_projection_test.cpp"
+    ],
+    LIBDEPS=[
+        "query_planner",
+    ],
+)
+
+env.CppUnitTest(
+    target="plan_cache_test",
+    source=[
+        "plan_cache_test.cpp"
+    ],
+    LIBDEPS=[
+        "query_planner_test_lib",
+    ],
+)
+
+env.CppUnitTest(
+    target="planner_ixselect_test",
+    source=[
+        "planner_ixselect_test.cpp"
+    ],
+    LIBDEPS=[
+        "query_planner",
+    ],
+)
+
+env.CppUnitTest(
+    target="query_planner_test",
+    source=[
+        "query_planner_test.cpp"
+    ],
+    LIBDEPS=[
+        "query_planner_test_lib",
+    ],
+)

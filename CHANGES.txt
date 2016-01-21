@@ -1,0 +1,82 @@
+This file states the main differences in the source code between MongoDB (version 2.5.5, available at https://github.com/mongodb/mongo/releases/tag/r2.5.5) and MongoDB-VLS, and between YCSB (version 0.1.4, available at https://github.com/brianfrankcooper/YCSB/releases/tag/0.1.4) and our modified version.
+
+-------------------------
+
+MongoDB and MongoDB-VLS
+
+- vls/src/mongo/bson/bsonelement.h
+- vls/src/mongo/bson/bson-inl.h: added a method for returning the integer value of a BSONElement
+
+- vls/src/mongo/db/catalog/index_catalog.cpp
+- vls/src/mongo/db/catalog/index_catalog.h: added attributes and methods to handle masks and remsets
+
+- vls/src/mongo/db/database.cpp
+- vls/src/mongo/db/database.h: added attributes and methods to handle masks and remsets
+
+- vls/src/mongo/db/db.cpp: added method to initialize the status masks for all the collections
+
+- vls/src/mongo/db/exec/collection_scan.cpp
+- vls/src/mongo/db/exec/collection_scan.h: added VLS code to collection scans (used in aggregate queries)
+
+- vls/src/mongo/db/exec/index_scan.cpp
+- vls/src/mongo/db/exec/index_scan.h: added VLS code to index scans (used in aggregate queries)
+
+- vls/src/mongo/db/index/2d_access_method.cpp
+- vls/src/mongo/db/index/2d_access_method.h
+- vls/src/mongo/db/index/btree_access_method.cpp
+- vls/src/mongo/db/index/btree_access_method.h
+- vls/src/mongo/db/index/btree_index_cursor.cpp
+- vls/src/mongo/db/index/btree_index_cursor.h
+- vls/src/mongo/db/index/btree_interface.cpp
+- vls/src/mongo/db/index/btree_interface.h
+- vls/src/mongo/db/index/fts_access_method.cpp
+- vls/src/mongo/db/index/fts_access_method.h
+- vls/src/mongo/db/index/hash_access_method.cpp
+- vls/src/mongo/db/index/hash_access_method.h
+- vls/src/mongo/db/index/haystack_access_method.cpp
+- vls/src/mongo/db/index/haystack_access_method.h
+- vls/src/mongo/db/index/index_cursor.h
+- vls/src/mongo/db/index/s2_access_method.cpp
+- vls/src/mongo/db/index/s2_access_method.h
+- vls/src/mongo/db/index/index_access_method.h: added methods for handling masks and remsets 
+
+- vls/src/mongo/db/ops/update.cpp: commenting out the code to deal with in-place updates, as the prototype cannot handle them as of now
+
+- vls/src/mongo/db/pipeline/pipeline_d.cpp: adding VLS to pipeline
+
+- vls/src/mongo/db/query/get_runner.cpp
+- vls/src/mongo/db/query/get_runner.h
+- vls/src/mongo/db/query/stage_builder.cpp
+- vls/src/mongo/db/query/stage_builder.h: changing methods so that pipeline and runners receive VLS information
+
+- vls/src/mongo/db/server_options.h
+- vls/src/mongo/db/server_options_helpers.cpp: added command-line parameter for enabling VLS for index scans
+
+- vls/src/mongo/db/structure/collection.cpp
+- vls/src/mongo/db/structure/collection.h
+- vls/src/mongo/db/structure/collection_iterator.cpp
+- vls/src/mongo/db/structure/collection_iterator.h: : added attributes and methods so that collections can handle masks on inserts, deletes, and updates
+
+-------------------------
+
+YCSB
+(Please note that we only include MongoDB's API)
+
+- ycsb/core/src/main/java/com/yahoo/ycsb/BasicDB.java: added methods for aggregate queries (full and index scans) and map-reduce queries
+
+- ycsb/core/src/main/java/com/yahoo/ycsb/Client.java: added an additional measurement for the benchmark; also, added a class that allows two benchmarks to be started at the same time (e.g.: aggregates with updates)
+
+- ycsb/core/src/main/java/com/yahoo/ycsb/DB.java: added abstract methods for aggregate queries (full and index scans) and map-reduce queries
+
+- ycsb/core/src/main/java/com/yahoo/ycsb/DBWrapper.java: added methods for collecting measurements of aggregate queries (full and index scans) and map-reduce queries
+
+- ycsb/core/src/main/java/com/yahoo/ycsb/measurements/Measurements.java
+- ycsb/core/src/main/java/com/yahoo/ycsb/measurements/OneMeasurement.java
+- ycsb/core/src/main/java/com/yahoo/ycsb/measurements/OneMeasurementHistogram.java
+- ycsb/core/src/main/java/com/yahoo/ycsb/measurements/OneMeasurementTimeSeries.java: adding methods to collect operation failures
+
+- ycsb/core/src/main/java/com/yahoo/ycsb/workloads/CoreWorkload.java: modified CoreWorkload to handle aggregate queries (full and index scans) and map-reduce queries
+
+- ycsb/mongodb/src/main/java/com/yahoo/ycsb/db/MongoDbClient.java: : added methods for aggregate queries (full and index scans) and map-reduce queries
+
+- ycsb/workloads/workloadg-t (new workload files)
