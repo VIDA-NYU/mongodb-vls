@@ -31,8 +31,7 @@ First, build and install TBB 4.2 Update 3; the source code and build instruction
 Next, build and install MongoDB-VLS, which follows the same instructions on installing MongoDB (you will need [SCons](http://www.scons.org/)):
 
     $ cd vls
-    $ scons --disable-warnings-as-errors
-    $ scons --prefix=/opt/mongo install
+    $ scons --disable-warnings-as-errors install
 
 We recommend using GCC 4.7+. More information about how to build and install MongoDB is available [here](https://github.com/mongodb/mongo/blob/5f2ad3f6411cb1c727e4b836798b8ef06de25f2d/docs/building.md).
 
