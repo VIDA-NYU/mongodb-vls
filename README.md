@@ -91,7 +91,11 @@ To generate the results for index scan aggregates, run the following script:
     
 ### Remset Size Results
 
+The scripts are the same, but to get information about remset size, debugging code from [`collection.h`](https://github.com/ViDA-NYU/mongodb-vls/blob/master/vls/src/mongo/db/structure/collection.h) and [`collection_scan.cpp`](https://github.com/ViDA-NYU/mongodb-vls/blob/master/vls/src/mongo/db/exec/collection_scan.cpp) must be uncommented.
+
 ### Varying the Size of Bit Vectors
+
+The scripts are the same, but the code must be changed to support 128-bit vectors, e.g., [`collection.h`](https://github.com/ViDA-NYU/mongodb-vls/blob/master/vls/src/mongo/db/structure/collection.h#L182) must be changed to support `std::bitset<128>`, rather than `uint64_t`.
     
 ### Plots
 
@@ -104,7 +108,7 @@ All plots were implemented using [matplotlib](http://matplotlib.org/).
 * Figures [10a](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/plots/results/tbb_index_scan_updates_95_percentile_mongodb_5.0.png), [10b](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/plots/results/tbb_index_scan_updates_95_percentile_mongodb_10.0.png), and [10c](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/plots/results/tbb_index_scan_updates_95_percentile_mongodb_25.0.png) (update latency for index scans): [`experiments/plots/index_scan_update_latency.py`](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/plots/index_scan_update_latency.py)
 * Figures [11a](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/plots/results/queue_size_testdb_100m_10000_8.png), [11b](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/plots/results/queue_size_testdb_100m_100000_8.png), [11c](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/plots/results/queue_size_testdb_100m_10000_16.png), and [11d](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/plots/results/queue_size_testdb_100m_100000_16.png) (remset size): [`experiments/plots/remset_size.py`](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/plots/remset_size.py)
 
-We have made available [ReproZip](https://vida-nyu.github.io/reprozip/) packages to reproduce the generation of these plots. For instance, to generate Figure 7:
+We have made available [ReproZip](https://vida-nyu.github.io/reprozip/) packages ([`experiments/reprozip`](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/reprozip)) to reproduce the generation of these plots. For instance, to generate Figure 7:
 
     $ cd experiments/reprozip
     $ reprounzip vagrant setup query_execution_time.rpz query_execution_time
