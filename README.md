@@ -110,10 +110,10 @@ All plots were implemented using [matplotlib](http://matplotlib.org/).
 We have made available [ReproZip](https://vida-nyu.github.io/reprozip/) packages ([`experiments/reprozip`](https://github.com/ViDA-NYU/mongodb-vls/blob/master/experiments/reprozip)) to reproduce the generation of these plots. For instance, to generate Figure 7:
 
     $ cd experiments/reprozip
-    $ reprounzip vagrant setup query_execution_time.rpz query_execution_time
-    $ reprounzip vagrant run query_execution_time
-    $ reprounzip vagrant download query_execution_time scan_duration.png:scan_duration.png
-    $ reprounzip vagrant download query_execution_time scan_duration_updates.png:scan_duration_updates.png
+    $ reprounzip vagrant setup query_execution_time.rpz query_execution_time/
+    $ reprounzip vagrant run query_execution_time/
+    $ reprounzip vagrant download query_execution_time/ scan_duration.png
+    $ reprounzip vagrant download query_execution_time/ scan_duration_updates.png
 
 Please refer to [ReproZip's documentation](https://vida-nyu.github.io/reprozip/) for more information on how to install and use the tool.
 
