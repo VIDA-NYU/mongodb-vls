@@ -6,7 +6,7 @@ MongoDB-VLS is a prototype implementation of VLS (Virtual Lightweight Snapshots)
 
 For more detailed information about the VLS technique, please refer to our ICDE paper:
 
-*Virtual Lightweight Snapshots for Consistent Analytics in NoSQL Stores, F. Chirigati, J. Siméon, M. Hirzel, and J. Freire. In Proceedings of the 32nd International Conference on Data Engineering (ICDE), 2016*
+[*Virtual Lightweight Snapshots for Consistent Analytics in NoSQL Stores, F. Chirigati, J. Siméon, M. Hirzel, and J. Freire. In Proceedings of the 32nd International Conference on Data Engineering (ICDE), 2016*](http://bigdata.poly.edu/~fchirigati/papers/chirigati-icde2016.pdf)
 
 The team includes:
 
